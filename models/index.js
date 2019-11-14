@@ -35,6 +35,24 @@ const Page = db.define("page", {
   }
 });
 
+function generateSlug(title) {
+  if (!title || title === "undefined") {
+    return (title =
+      Math.random()
+        .toString(36)
+        .substring(2, 10) +
+      Math.random()
+        .toString(36)
+        .substring(2, 10));
+  } else {
+    return title.replace(/\s+/g, "_").replace(/\W/g, "");
+  }
+}
+
+Page.beforeValidate(page => {
+  page.slug = generateSlug(page.title);
+});
+
 module.exports = {
   db,
   Page,

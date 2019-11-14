@@ -12,7 +12,7 @@ app.use("/wiki", wikiRouter);
 app.use("/user", userRouter);
 
 app.get("/", (req, res, next) => {
-  res.send(layout(""));
+  res.redirect('/wiki');
 });
 
 const init = async () => {
